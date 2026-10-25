@@ -6,26 +6,25 @@
 normal
 
 ┌──(aden-skirata㉿kali)-[~]
-└─$ head -n 15 ~/processes.txt 
+└─$ ps aux --sort=-%cpu > processes.txt 2>/dev/null
+                                                                                                                                   
+┌──(aden-skirata㉿kali)-[~]
+└─$ head processes.txt
 USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-root         629  0.5  4.6 1173220 279864 tty7   Ssl+ 09:28   0:13 /usr/lib/xorg/Xorg :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch
-aden-sk+    1116  0.3  2.3 1735004 140164 ?      Sl   09:28   0:10 xfwm4
-aden-sk+    1220  0.2  0.5 277664 30300 ?        Sl   09:28   0:06 /usr/lib/x86_64-linux-gnu/xfce4/panel/wrapper-2.0 /usr/lib/x86_64-linux-gnu/xfce4/panel/plugins/libgenmon.so 15 25165838 genmon Generic Monitor Show output of a command.
-aden-sk+    1032  0.2  0.0 215492  3372 ?        Sl   09:28   0:06 /usr/bin/VBoxClient --draganddrop
-aden-sk+    1214  0.2  0.9 308712 57556 ?        Sl   09:28   0:06 /usr/lib/x86_64-linux-gnu/xfce4/panel/wrapper-2.0 /usr/lib/x86_64-linux-gnu/xfce4/panel/plugins/libcpugraph.so 13 25165836 cpugraph CPU Graph Graphical representation of the CPU load
-aden-sk+    2177  0.1  1.3 752144 83748 ?        Rl   09:29   0:04 /usr/bin/qterminal
-aden-sk+    2222  0.0  0.1  10520  6628 pts/0    Ss   09:29   0:01 /usr/bin/zsh
-root         568  0.0  0.0 352956  2796 ?        Sl   09:28   0:01 /usr/bin/VBoxDRMClient
-aden-sk+    1024  0.0  0.0 214976  3468 ?        Sl   09:28   0:01 /usr/bin/VBoxClient --seamless
-root        4923  0.0  0.0      0     0 ?        I    09:34   0:01 [kworker/2:0-events]
-aden-sk+    1167  0.0  2.2 1554004 132108 ?      Sl   09:28   0:01 xfdesktop
-aden-sk+   22943  0.0  0.1 309336  7204 ?        Ssl  10:10   0:00 /usr/lib/x86_64-linux-gnu/xfce4/xfconf/xfconfd
-aden-sk+    1150  0.0  0.8 1051000 52948 ?       Sl   09:28   0:01 xfce4-panel
-root           1  0.0  0.2  28420 17320 ?        Ss   09:27   0:01 /sbin/init splash
-                                                                                                                                                                                                                                         
+aden-sk+    1164  3.2  1.0 1186116 60892 ?       Sl   11:44   0:00 xfdesktop
+aden-sk+    1834  3.1  1.2 742092 72736 ?        Sl   11:44   0:00 /usr/bin/qterminal
+aden-sk+    1545  2.5  1.0 604524 61204 ?        Sl   11:44   0:00 /usr/bin/python3 /usr/bin/blueman-applet
+aden-sk+    1148  2.2  0.8 1186512 53228 ?       Sl   11:44   0:00 xfce4-panel
+aden-sk+    1114  2.2  2.2 1738144 132164 ?      Sl   11:44   0:00 xfwm4
+root         626  1.3  2.7 893748 163700 tty7    Ssl+ 11:43   0:00 /usr/lib/xorg/Xorg :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch
+aden-sk+    1169  1.3  0.7 981376 42932 ?        Sl   11:44   0:00 /usr/lib/x86_64-linux-gnu/xfce4/panel/wrapper-2.0 /usr/lib/x86_64-linux-gnu/xfce4/panel/plugins/libwhiskermenu.so 1 25165831 whiskermenu Whisker Menu Show a menu to easily access installed applications
+aden-sk+     945  1.2  0.6 765704 41516 ?        Ssl  11:44   0:00 xfce4-session
+aden-sk+    1255  1.0  0.1 213504  7856 ?        Sl   11:44   0:00 /usr/libexec/glycin-loaders/2+/glycin-image-rs --dbus-fd 19
+                                                                                                                                   
 ┌──(aden-skirata㉿kali)-[~]
 └─$ wc -l ~/processes.txt
-191 /home/aden-skirata/processes.txt
+247 /home/aden-skirata/processes.txt
+                                        
 ```
 
 ```
@@ -126,5 +125,70 @@ Nmap done: 1 IP address (1 host up) scanned in 14.63 seconds
 ```
 
 ```
+результат не приложу, на этом скане повисла виртуалка, скан всех портов
 
+nmap -p- scanme.nmap.org
+```
+
+```
+tcp+udp
+
+┌──(aden-skirata㉿kali)-[~]
+└─$ nmap -sU -sS -p U:53,111,137,T:21-25,80,139,8080 scanme.nmap.org
+Starting Nmap 7.991 ( https://nmap.org ) at 2026-10-25 11:51 -0400
+Warning: Hostname scanme.nmap.org resolves to 2 IPs. Using 45.33.32.156.
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.23s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+
+PORT     STATE    SERVICE
+21/tcp   closed   ftp
+22/tcp   open     ssh
+23/tcp   closed   telnet
+24/tcp   closed   priv-mail
+25/tcp   filtered smtp
+80/tcp   open     http
+139/tcp  closed   netbios-ssn
+8080/tcp closed   http-proxy
+53/udp   closed   domain
+111/udp  closed   rpcbind
+137/udp  closed   netbios-ns
+
+Nmap done: 1 IP address (1 host up) scanned in 3.20 seconds
+```
+
+```
+versions, applications, port 1-1000
+
+┌──(aden-skirata㉿kali)-[~]
+└─$ nmap -sV -O -p 1-1000 scanme.nmap.org
+Starting Nmap 7.991 ( https://nmap.org ) at 2026-10-25 12:05 -0400
+Warning: Hostname scanme.nmap.org resolves to 2 IPs. Using 45.33.32.156.
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.27s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+Not shown: 997 closed tcp ports (reset)
+PORT   STATE    SERVICE VERSION
+22/tcp open     ssh     OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.13 (Ubuntu Linux; protocol 2.0)
+25/tcp filtered smtp
+80/tcp open     http    Apache httpd 2.4.7 ((Ubuntu))
+Aggressive OS guesses: Linux 4.19 - 5.15 (99%), Linux 4.15 (95%), IPFire 2.27 (Linux 5.15 - 6.1) (94%), Linux 6.12 (94%), Linux 5.4 (93%), Linux 5.0 - 5.14 (92%), MikroTik RouterOS 7.2 - 7.5 (Linux 5.6.3) (92%), Linux 3.11 - 4.9 (92%), Linux 3.2 - 3.8 (92%), Linux 6.1 (91%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 25 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 34.62 seconds
+```
+
+```
+grepable format to console
+
+┌──(aden-skirata㉿kali)-[~]
+└─$ nmap -p 1-1000 -oG - scanme.nmap.org
+#Nmap 7.991 scan initiated Sun Oct 25 12:11:08 2026 as: /usr/lib/nmap/nmap --privileged -p 1-1000 -oG - scanme.nmap.org
+Warning: Hostname scanme.nmap.org resolves to 2 IPs. Using 45.33.32.156.
+Host: 45.33.32.156 (scanme.nmap.org)    Status: Up
+Host: 45.33.32.156 (scanme.nmap.org)    Ports: 22/open/tcp//ssh///, 25/filtered/tcp//smtp///, 80/open/tcp//http///      Ignored State: closed (997)
+#Nmap done at Sun Oct 25 12:12:12 2026 -- 1 IP address (1 host up) scanned in 64.50 seconds
 ```
